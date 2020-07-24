@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
     {% if title %}
@@ -13,30 +14,30 @@
 </head>
 
 <body>
-
     <header class="site-header">
       <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
         <div class="container">
           <a href="/" class="logo">
-              <img src="static/img/real.png" alt="Real Madrid"/>
+              <img class="rounded-circle account-img" src="{{ logo }}" alt="Real Madrid"/>
           </a>
-          <a class="navbar-brand mr-4" href="/">Real Madrid Blog</a>
+          <a class="navbar-brand mr-5" href="/">Real Madrid Blog</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarToggle">
             <div class="navbar-nav mr-auto">
-              <a class="nav-item nav-link" href="{{ url_for('home') }}">Home</a>
-              <a class="nav-item nav-link" href="{{ url_for('about') }}">About</a>
+              <a class="nav-item nav-link mr-3" href="{{ url_for('main.home') }}">Home</a>
+              <a class="nav-item nav-link" href="{{ url_for('main.about') }}">About</a>
             </div>
             <!-- Navbar Right Side -->
               <div class="navbar-nav">
               {% if current_user.is_authenticated %}
-                  <a class="nav-item nav-link" href="{{ url_for('account') }}">Account: {{ current_user.username }}</a>
-                  <a class="nav-item nav-link" href="{{ url_for('logout') }}">Logout</a>
+                  <a class="nav-item nav-link" href="{{ url_for('users.account') }}"><img class="rounded-circle account-img" src="{{ image_file }}"/></a>
+                  <a class="nav-item nav-link" href="{{ url_for('posts.new_post') }}"><p class="user-nav">New Post</p></a>
+                  <a class="nav-item nav-link" href="{{ url_for('users.logout') }}"><p class="user-nav">Logout</p></a>
               {% else %}
-                  <a class="nav-item nav-link" href="{{ url_for('login') }}">Login</a>
-                  <a class="nav-item nav-link" href="{{ url_for('register') }}">Register</a>
+                  <a class="nav-item nav-link" href="{{ url_for('users.login') }}">Login</a>
+                  <a class="nav-item nav-link" href="{{ url_for('users.register') }}">Register</a>
               {% endif %}
             </div>
           </div>
@@ -55,7 +56,7 @@
                 {%  endfor %}
             {% endif %}
           {% endwith %}
-          {% block content %}{% endblock %}
+          {% block content %} {% endblock %}
         </div>
         <div class="col-md-4">
           <div class="content-section">
