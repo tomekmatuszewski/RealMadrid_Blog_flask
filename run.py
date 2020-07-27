@@ -1,3 +1,4 @@
-from realmadrid_blog import app
+from realmadrid_blog import create_app
 
+app = create_app()
 app.run(debug=True)
